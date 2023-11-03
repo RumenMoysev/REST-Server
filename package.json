@@ -4,7 +4,7 @@
   "description": "This repository includes a REST server skeleton which im going to use in my projects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./src/app.js"
   },
   "keywords": [],
   "author": "",

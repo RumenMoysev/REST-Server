@@ -12,10 +12,10 @@ router.post('/register', async (req, res) => {
     const rePassword = req.body.repeatPassword
 
     try {
-        const user = await userManager.register(userData, rePassword)
+        const [user, authToken] = await userManager.register(userData, rePassword)
 
         res.json({
-            authToken: 'nqmame',
+            authToken: authToken,
             email: user.email,
             userId: user._id
         })
@@ -35,9 +35,18 @@ router.post('/login', async (req, res) => {
     }
 
     try {
-        const user = await userManager.login(userData)
-    } catch (err) {
+        const [user, authToken] = await userManager.login(userData)
+
+        res.json({
+            authToken: authToken,
+            email: user.email,
+            userId: user._id
+        })
         
+    } catch (err) {
+        res.status(400).json({
+            message: err.message
+        })
     }
 })
 

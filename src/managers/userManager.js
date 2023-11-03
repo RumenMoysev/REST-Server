@@ -43,7 +43,8 @@ exports.register = async (userData, rePassword) => {
             userName: user.username
         }
 
-        return createJWTtoken(payload, SECRET, {expiresIn: '2d'})
+        const token = await jwt.sign(payload, SECRET, {expiresIn: '2d'})
+        return [payload, token]
     } catch (error) {
         throw new Error(error.message)
     }
@@ -62,14 +63,13 @@ exports.login = async (userData) => {
                 throw new Error('Email or password do not match!')
             }
 
-
             const payload = {
                 _id: user._id,
                 email: user.email,
                 userName: user.username
             }
 
-            const token = await createJWTtoken(payload, SECRET)
+            const token = await jwt.sign(payload, SECRET)
 
             return [payload, token]
         } else {

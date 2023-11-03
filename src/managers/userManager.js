@@ -40,7 +40,7 @@ exports.register = async (userData, rePassword) => {
         const payload = {
             _id: user._id,
             email: user.email,
-            userName: user.username
+            username: user.username
         }
 
         const token = await jwt.sign(payload, SECRET, {expiresIn: '2d'})
@@ -66,7 +66,7 @@ exports.login = async (userData) => {
             const payload = {
                 _id: user._id,
                 email: user.email,
-                userName: user.username
+                username: user.username
             }
 
             const token = await jwt.sign(payload, SECRET)
